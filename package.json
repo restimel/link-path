@@ -1,0 +1,36 @@
+{
+    "name": "link-path",
+    "version": "1.0.0",
+    "description": "Help to explores different path like in adventure books.",
+    "author": "Restimel",
+    "license": "MIT",
+    "keywords": [
+        "links",
+        "path",
+        "relations",
+        "game book",
+        "choose you own adventure book"
+    ],
+    "private": false,
+    "scripts": {
+        "serve": "vue-cli-service serve",
+        "build": "vue-cli-service build",
+        "lint": "vue-cli-service lint"
+    },
+    "dependencies": {
+        "@vue/composition-api": "^1.0.0-beta.22",
+        "mermaid": "^8.8.4",
+        "npm": "^6.14.10",
+        "vue": "^3.0.0",
+        "vue-router": "^4.0.0-0",
+        "yaml": "^1.10.0"
+    },
+    "devDependencies": {
+        "@vue/cli-plugin-eslint": "~4.5.0",
+        "@vue/cli-plugin-router": "~4.5.0",
+        "@vue/cli-service": "~4.5.0",
+        "@vue/compiler-sfc": "^3.0.0",
+        "eslint": "^6.7.2",
+        "eslint-plugin-vue": "^7.0.0-0"
+    }
+}
