@@ -5,6 +5,11 @@
         >
             Number of starting Id: {{rootLinks.length}}
         </label>
+        <label
+            :title="leafLinks.join(', ')"
+        >
+            Number of ending Id: {{leafLinks.length}}
+        </label>
     </aside>
 </template>
 <script>
@@ -33,6 +38,19 @@ export default {
             });
 
             return Array.from(roots);
+        },
+        leafLinks() {
+            const store = this.store;
+            const items = store.items;
+
+            const leaves = items.reduce((list, item) => {
+                if (item.links.length === 0) {
+                    list.push(item.id);
+                }
+                return list;
+            }, []);
+
+            return Array.from(leaves);
         },
     },
 };

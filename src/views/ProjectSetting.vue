@@ -122,6 +122,7 @@ export default {
                 label: 'Columns',
                 value: store.cols,
                 type: 'list',
+                title: 'name[type]\ntype = text | number | boolean | longText | empty | emptyLine | rawText | select | list | button',
             }, {
                 type: 'emptyLine',
             }, {

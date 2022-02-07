@@ -5,8 +5,11 @@
         <span v-for="link of links"
             :key="`link-${link}`"
             class="link"
-            title="Remove this link"
-            @click.stop.prevent="clickLink(link)"
+            title="Remove this link
+ctrl + click: go to link"
+            @click.ctrl.stop.prevent="gotoLink(link)"
+            @click.shift.stop.prevent="gotoLink(link)"
+            @click.exact.stop.prevent="clickLink(link)"
         >
             {{link}}
         </span>
@@ -43,6 +46,9 @@ export default {
                 id: 'links',
                 value: `- ${link}`,
             });
+        },
+        gotoLink(link) {
+            window.location.pathname = `links/${link}`;
         },
     },
 };

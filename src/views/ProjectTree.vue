@@ -4,11 +4,17 @@
         <div
             class="tree-container"
         >
+            <label @click="changeOrientation">
+                Current orientation:
+                <span v-if="horizontalOrientation">→</span>
+                <span v-else>↓</span>
+            </label>
             <div v-if="!ready" class="message">
                 Loading tree...
             </div>
             <div class="mermaid-container mermaid"
                 ref="mermaid"
+                :key="mermaidId"
             >
                 {{mermaidText}}
             </div>
@@ -32,16 +38,24 @@ export default {
             mermaidText: 'graph LR;A[...];',
             isReady: false,
             isMounted: false,
+            horizontalOrientation: true,
+            mermaidId: 0,
         };
     },
     methods: {
+        changeOrientation() {
+            this.horizontalOrientation = !this.horizontalOrientation;
+            this.updateMermaidText();
+        },
         updateMermaidText() {
+            this.mermaidId++;
+            this.isReady = false;
             if (!this.isMounted) {
                 return;
             }
             const store = this.store;
             const items = store.items;
-            const kind = 'graph LR;';
+            const kind = this.horizontalOrientation ? 'graph LR;' : 'graph TD;';
             const sequences = [];
             const list = items.map(item => {
                 if (item.links.length) {
@@ -52,7 +66,6 @@ export default {
 
             this.mermaidText = `${kind}${list.join('')}${sequences.join('')}`;
 
-            this.isReady = false;
             setTimeout(() => {
                 mermaid.init(undefined, this.$refs.mermaid);
                 this.isReady = true;
@@ -86,7 +99,7 @@ export default {
             securitylevel: 'strict',
         });
         this.isMounted = true;
-        if (this.isReady) {
+        if (!this.isReady) {
             setTimeout(() => {
                 this.updateMermaidText();
             }, 100);
@@ -94,10 +107,10 @@ export default {
     },
     created() {
         this.isReady = false;
-        setTimeout(() => {
-            this.isReady = true;
-            this.updateMermaidText();
-        }, 100);
+        // setTimeout(() => {
+        //     this.isReady = true;
+        //     this.updateMermaidText();
+        // }, 100);
     },
     components: {
         PageTitle,
